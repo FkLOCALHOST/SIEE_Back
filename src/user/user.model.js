@@ -34,7 +34,7 @@ const userSchema = new Schema({
         ref: "PsychologicalState",
         default: null
     },
-    type: {
+    role: {
         type: String,
         enum: ["ADMIN", "STUDENT", "PROFESSOR", "PARENT", "MENTOR"],
         default: "STUDENT",

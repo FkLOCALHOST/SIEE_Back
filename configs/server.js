@@ -6,6 +6,7 @@ import morgan from "morgan";
 import express from "express";
 import { connectionDB } from "./mongo.js";
 import authRoutes from "../src/auth/auth.routes.js"
+import userRoutes from "../src/user/user.routes.js"
 
 const middlewares = (app) => {
     app.use(express.urlencoded({extended:true}));
@@ -17,6 +18,7 @@ const middlewares = (app) => {
 
 const routes = (app) =>{
     app.use("/sieeSystem/v1/auth", authRoutes);
+    app.use("/sieeSystem/v1/user", userRoutes);
 }
 
 const connectionMongo = async() =>{
