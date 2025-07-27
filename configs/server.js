@@ -7,6 +7,7 @@ import express from "express";
 import { connectionDB } from "./mongo.js";
 import authRoutes from "../src/auth/auth.routes.js"
 import userRoutes from "../src/user/user.routes.js"
+import courseRoutes from "../src/courses/course.route.js"
 
 const middlewares = (app) => {
     app.use(express.urlencoded({extended:true}));
@@ -19,6 +20,7 @@ const middlewares = (app) => {
 const routes = (app) =>{
     app.use("/sieeSystem/v1/auth", authRoutes);
     app.use("/sieeSystem/v1/user", userRoutes);
+    app.use("/sieeSystem/v1/course",courseRoutes)
 }
 
 const connectionMongo = async() =>{
