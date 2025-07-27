@@ -29,6 +29,11 @@ const userSchema = new Schema({
         ref: "Course",
         default: []
     }],
+    grades:[{
+        type: Schema.Types.ObjectId,
+        ref: "Grade",
+        default: []
+    }],
     psychologicalState: {
         type: Schema.Types.ObjectId,
         ref: "PsychologicalState",
