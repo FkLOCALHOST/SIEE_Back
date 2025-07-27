@@ -1,6 +1,8 @@
-import { check } from "express-validator";
+import { check, param } from "express-validator";
 import { emailExists } from "../helpers/db-validator.js";
 import { validationsFields } from "./validations-fields.js";
+import { validateJWT } from "./validate-token.js";
+import { hasRoles } from "./validate-role.js";
 
 export const registerValidator = [
     check("name").not().isEmpty().withMessage("El nombre es obligatorio"),
@@ -19,16 +21,21 @@ export const loginValidator = [
 ]
 
 export const getUserByIdValidator = [
-    check("uid").isMongoId().withMessage("El ID del usuario no es válido"),
-    validationsFields
+    param("uid").isMongoId().withMessage("El ID del usuario no es válido"),
+    validationsFields,
+    validateJWT,
+    hasRoles("ADMIN")
 ]
 
 export const updateUserValidator = [
-    check("uid").isMongoId().withMessage("El ID del usuario no es válido"),
-    validationsFields
+    param("uid").isMongoId().withMessage("El ID del usuario no es válido"),
+    validationsFields,
+    validateJWT,
 ]
 
 export const deleteUserValidator = [
-    check("uid").isMongoId().withMessage("El ID del usuario no es válido"),
-    validationsFields
+    param("uid").isMongoId().withMessage("El ID del usuario no es válido"),
+    validationsFields,
+    validateJWT,
+    hasRoles("ADMIN")
 ]
