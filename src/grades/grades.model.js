@@ -19,3 +19,11 @@ export const gradesSchema = new Schema({
     versionKey: false,
     timestamps: true
 })
+
+gradesSchema.methods.toJSON = function () {
+    const { _v, _id, ...grades } = this.toObject()
+    grades.uid = _id;
+    return grades;
+}
+
+export default model("Grades", gradesSchema)

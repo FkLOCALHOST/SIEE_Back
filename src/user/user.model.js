@@ -31,7 +31,7 @@ const userSchema = new Schema({
     }],
     grades:[{
         type: Schema.Types.ObjectId,
-        ref: "Grade",
+        ref: "Grades",
         default: []
     }],
     psychologicalState: {
