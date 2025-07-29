@@ -5,6 +5,29 @@ import { uploadProductImage, handleUploadErrors } from "../middlewares/cloudinar
 
 const router = Router();
 
+/**
+ * @swagger
+ * /register:
+ *   post:
+ *     tags:
+ *       - Auth
+ *     summary: Registrar un nuevo usuario
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             $ref: '#/components/schemas/Register'
+ *     responses:
+ *       201:
+ *         description: Usuario registrado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuthResponse'
+ *       400:
+ *         description: Error de validación o subida de imagen
+ */
 router.post(
     "/register",
     uploadProductImage,
@@ -13,6 +36,29 @@ router.post(
     register
 )
 
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     tags:
+ *       - Auth
+ *     summary: Iniciar sesión de usuario
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Login'
+ *     responses:
+ *       200:
+ *         description: Usuario autenticado exitosamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuthResponse'
+ *       400:
+ *         description: Credenciales inválidas
+ */
 router.post(
     "/login",
     loginValidator,
