@@ -14,6 +14,10 @@ export const gradesSchema = new Schema({
     score:{
         type: Number,
         required: [true, "La calificación es obligatoria"]
+    },
+    status:{
+        type: Boolean,
+        default: true
     }
 },{
     versionKey: false,
