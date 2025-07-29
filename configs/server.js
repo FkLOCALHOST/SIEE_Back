@@ -9,6 +9,7 @@ import authRoutes from "../src/auth/auth.routes.js"
 import userRoutes from "../src/user/user.routes.js"
 import courseRoutes from "../src/courses/course.route.js"
 import gradesRoutes from "../src/grades/grades.routes.js";
+import { swaggerDocs, swaggerUi} from "./swagger.js"
 import psychRoutes from "../src/psych/psych.routes.js";
 
 const middlewares = (app) => {
@@ -24,6 +25,7 @@ const routes = (app) =>{
     app.use("/sieeSystem/v1/user", userRoutes);
     app.use("/sieeSystem/v1/course",courseRoutes)
     app.use("/sieeSystem/v1/grades", gradesRoutes);
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
     app.use("/sieeSystem/v1/psych", psychRoutes);
 }
 
