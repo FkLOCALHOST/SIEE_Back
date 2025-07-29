@@ -10,7 +10,7 @@ export const registerValidator = [
     check("email").custom(emailExists).withMessage("El correo ya está registrado"),
     check("password").isLength({ min: 6 }).not().isEmpty().withMessage("La contraseña es obligatoria"),
     check("phone").not().isEmpty().withMessage("El número de teléfono es obligatorio"),
-    check("type").notEmpty().withMessage("El tipo de usuario es obligatorio"),
+    check("role").notEmpty().withMessage("El tipo de usuario es obligatorio"),
     validationsFields
 ]
 

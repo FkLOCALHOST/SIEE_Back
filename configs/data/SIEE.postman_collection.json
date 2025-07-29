@@ -43,8 +43,9 @@
 									"type": "text"
 								},
 								{
-									"key": "type",
-									"value": "ADMIN",
+									"key": "role",
+									"value": "STUDENT",
+									"description": "Cambiar role para ver lo dinamico",
 									"type": "text"
 								},
 								{
@@ -678,6 +679,230 @@
 								{
 									"key": "uid",
 									"value": "6887f6d38ec0fee5ee54f9f2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Psych",
+			"item": [
+				{
+					"name": "Add and Assing Psych",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg3ZjVlMThlYzBmZWU1ZWU1NGY5ZWMiLCJpYXQiOjE3NTM3NTkyMjYsImV4cCI6MTc1Mzc2MjgyNn0.njTSufpbNBZFNJKMJbypjdTvYl8qm-pVL3CQh5i-9YE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"TRABAJO_EN_EQUIPO\",\r\n    \"percentage\": \"76\",\r\n    \"student\": \"6887f5e18ec0fee5ee54f9ec\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/psych/addPsych",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"psych",
+								"addPsych"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Psych",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg3ZjVlMThlYzBmZWU1ZWU1NGY5ZWMiLCJpYXQiOjE3NTM3NTkyMjYsImV4cCI6MTc1Mzc2MjgyNn0.njTSufpbNBZFNJKMJbypjdTvYl8qm-pVL3CQh5i-9YE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/psych/getPsych/:uid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"psych",
+								"getPsych",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "68883e38399ed0efc7cadce3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Psych by Student",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg3ZjVlMThlYzBmZWU1ZWU1NGY5ZWMiLCJpYXQiOjE3NTM3NTkyMjYsImV4cCI6MTc1Mzc2MjgyNn0.njTSufpbNBZFNJKMJbypjdTvYl8qm-pVL3CQh5i-9YE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/psych/getPsychByStudent/:uid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"psych",
+								"getPsychByStudent",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "6887f5e18ec0fee5ee54f9ec"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Psych",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg3ZjVlMThlYzBmZWU1ZWU1NGY5ZWMiLCJpYXQiOjE3NTM3NTkyMjYsImV4cCI6MTc1Mzc2MjgyNn0.njTSufpbNBZFNJKMJbypjdTvYl8qm-pVL3CQh5i-9YE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"percentage\": \"86\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/psych/updatePsych/:uid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"psych",
+								"updatePsych",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "68883e38399ed0efc7cadce3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Psych Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2ODg3ZjVlMThlYzBmZWU1ZWU1NGY5ZWMiLCJpYXQiOjE3NTM3NTkyMjYsImV4cCI6MTc1Mzc2MjgyNn0.njTSufpbNBZFNJKMJbypjdTvYl8qm-pVL3CQh5i-9YE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/psych/deletePsych/:uid",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"psych",
+								"deletePsych",
+								":uid"
+							],
+							"variable": [
+								{
+									"key": "uid",
+									"value": "68883e38399ed0efc7cadce3"
 								}
 							]
 						}
