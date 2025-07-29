@@ -34,11 +34,11 @@ const userSchema = new Schema({
         ref: "Grades",
         default: []
     }],
-    psychologicalState: {
+    psychologicalState: [{
         type: Schema.Types.ObjectId,
-        ref: "PsychologicalState",
-        default: null
-    },
+        ref: "Psych",
+        default: []
+    }],
     role: {
         type: String,
         enum: ["ADMIN", "STUDENT", "PROFESSOR", "PARENT", "MENTOR"],
