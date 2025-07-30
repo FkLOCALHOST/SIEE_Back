@@ -1,5 +1,5 @@
 import Grades from "./grades.model.js";
-import User from "../user/user.model.js";
+import {Student} from "../user/user.model.js";
 
 export const createGrade = async(req,res) =>{
     try{
@@ -7,7 +7,7 @@ export const createGrade = async(req,res) =>{
 
         const grade = await Grades.create(data);
 
-        await User.findByIdAndUpdate(data.student, {$addToSet: {grades: grade._id}}, {new: true})
+        await Student.findByIdAndUpdate(data.student, {$addToSet: {grades: grade._id}}, {new: true})
 
         return res.status(201).json({
             success: true,
@@ -70,6 +70,35 @@ export const getGradesByCourse = async(req,res) =>{
         return res.status(500).json({
             success: false,
             message: err.message
+        })
+    }
+}
+
+export const getGradesByCourseTop10 = async(req,res) =>{
+    try{
+        const {uid} = req.params;
+        const query = {course:uid}
+
+        const [total, grades] = await Promise.all([
+            Grades.countDocuments(query),
+            Grades.find(query)
+                .populate("course", "courseName")
+                .populate("student", "name lastName")
+                .sort({ score: -1 })
+                .limit(10)
+        ])
+
+        return res.status(200).json({
+            success: true,
+            total,
+            topGrades: grades,
+            message: `Top 10 mejores calificaciones del curso`
+        })
+
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Error al obtener el top 10 de calificaciones"
         })
     }
 }

@@ -1,5 +1,5 @@
 import Courses from "./courses.model.js";
-import User from "../user/user.model.js";
+import {Student} from "../user/user.model.js";
 
 export const createCourse = async (req, res) => {
     try {
@@ -118,7 +118,7 @@ export const enrollStudent = async (req, res) => {
 
         await Promise.all([
             Courses.findByIdAndUpdate(data.course, { $addToSet: { participants: data.student } }, { new: true }),
-            User.findByIdAndUpdate(data.student, { $addToSet: { courses: data.course } }, { new: true })
+            Student.findByIdAndUpdate(data.student, { $addToSet: { courses: data.course } }, { new: true })
         ])
 
         return res.status(200).json({

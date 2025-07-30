@@ -1,12 +1,12 @@
 import Psych from "./psych.model.js";
-import User from "../user/user.model.js";
+import {Student} from "../user/user.model.js";
 
 export const createPsych = async (req, res) => {
     try{
         const data = req.body
         const psych = await Psych.create(data)
         
-        await User.findByIdAndUpdate(data.student, {$addToSet: {psychologicalState: psych._id}}, {new: true})
+        await Student.findByIdAndUpdate(data.student, {$addToSet: {psychologicalState: psych._id}}, {new: true})
 
         return res.status(201).json({
             success: true,
