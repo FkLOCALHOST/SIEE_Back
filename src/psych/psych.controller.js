@@ -27,7 +27,7 @@ export const getPsych = async(req,res) =>{
 
         const [total, psych] = await Promise.all([
             Psych.countDocuments(query),
-            Psych.find(query)
+            Psych.find(query).populate('student', 'name lastName email')
         ])
 
         return res.status(200).json({
