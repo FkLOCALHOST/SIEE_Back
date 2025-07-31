@@ -1,67 +1,78 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
+
+const { Schema, model } = mongoose;
+
+const options = { discriminatorKey: 'role', timestamps: true, versionKey: false };
 
 const userSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, "Name is required"]
+    name: { 
+        type: String, 
+        required: true },
+    lastName: { 
+        type: String, 
+        required: true },
+    email: { 
+        type: String, 
+        required: true, 
+        unique: true },
+    password: { 
+        type: String, 
+        required: true },
+    phone: { 
+        type: String, 
+        required: true, 
+        unique: true },
+    profilePicture: String,
+    status: { 
+        type: Boolean, 
+        default: true 
     },
-    lastName: {
-        type: String,
-        required: [true, "Last name is required"]
-    },
-    email: {
-        type: String,
-        required: [true, "Email is required"],
-        unique: true,
+}, options);
 
-    },
-    password: {
-        type: String,
-        required: [true, "Password is required"]
-    },
-    phone: {
-        type: String,
-        required: [true, "Pone number is required"],
-        unique: true
-    },
-    courses: [{
-        type: Schema.Types.ObjectId,
-        ref: "Course",
-        default: []
-    }],
-    grades:[{
-        type: Schema.Types.ObjectId,
-        ref: "Grades",
-        default: []
-    }],
-    psychologicalState: {
-        type: Schema.Types.ObjectId,
-        ref: "PsychologicalState",
-        default: null
-    },
-    role: {
-        type: String,
-        enum: ["ADMIN", "STUDENT", "PROFESSOR", "PARENT", "MENTOR"],
-        default: "STUDENT",
-        required: [true, "User type is required"]
-    },
-    profilePicture: {
-        type: String,
-    },
-    status: {
-        type: Boolean,
-        default: true
-    }
-}, {
-    versionKey: false,
-    timestamps: true
+const User = model("User", userSchema);
 
+const studentSchema = new Schema({
+    courses: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: "Course" }],
+    grades: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: "Grades" }],
+    psychologicalState: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: "Psych" }],
 });
 
-userSchema.methods.toJSON = function () {
-    const { _v, password, _id, ...user } = this.toObject()
-    user.uid = _id;
-    return user;
-}
+const Student = User.discriminator("STUDENT", studentSchema);
 
-export default model("User", userSchema)
+const professorSchema = new Schema({
+    courses: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: "Course" }],
+});
+
+const MentorSchema = new Schema({
+    students: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: "User" }],
+});
+const Mentor = User.discriminator("MENTOR", MentorSchema);
+
+const Professor = User.discriminator("PROFESSOR", professorSchema);
+
+const parentSchema = new Schema({
+    dependents: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: "User" 
+    }],
+});
+
+const adminSchema = new Schema({  });
+const Admin = User.discriminator("ADMIN", adminSchema);
+
+
+const Parent = User.discriminator("PARENT", parentSchema);
+
+export { User, Student, Professor, Parent, Admin };
+
+export default User;

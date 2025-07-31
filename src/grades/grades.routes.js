@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createGrade, getGradesByStudent, getGradesByCourse, updateGrade } from "./grades.controller.js";
+import { createGrade,getGradesByCourseTop10, getGradesByStudent, getGradesByCourse, updateGrade } from "./grades.controller.js";
 import { createGradeValidator, getGradesByCourseValidator, getGradesByStudentValidator, updateGradeValidator } from "../middlewares/grade-validator.js";
 
 const router = Router();
@@ -133,6 +133,12 @@ router.patch(
     "/updateGrade/:uid",
     updateGradeValidator,
     updateGrade
+);
+
+router.get(
+    "/getGradesByCourseTop10/:uid",
+    getGradesByCourseValidator,
+    getGradesByCourseTop10
 );
 
 export default router;
