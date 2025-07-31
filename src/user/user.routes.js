@@ -30,7 +30,7 @@ const router = Router();
 router.get(
     "/",
     validateJWT,
-    hasRoles("ADMIN"),
+    hasRoles("ADMIN","MENTOR"),
     getUser
 );
 

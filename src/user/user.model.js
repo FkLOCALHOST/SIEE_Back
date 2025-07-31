@@ -51,6 +51,13 @@ const professorSchema = new Schema({
         ref: "Course" }],
 });
 
+const MentorSchema = new Schema({
+    students: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: "User" }],
+});
+const Mentor = User.discriminator("MENTOR", MentorSchema);
+
 const Professor = User.discriminator("PROFESSOR", professorSchema);
 
 const parentSchema = new Schema({
