@@ -27,12 +27,7 @@ const router = Router();
  *       401:
  *         description: No autorizado
  */
-router.get(
-    "/",
-    validateJWT,
-    hasRoles("ADMIN"),
-    getUser
-);
+router.get("/", validateJWT, hasRoles("ADMIN", "PROFESSOR"), getUser);
 
 /**
  * @swagger

@@ -15,7 +15,7 @@ export const validateJWT = async (req, res, next) => {
 
         token = token.replace(/^Bearer\s+/, "");
 
-        const {uid} = jwt.verify(token, process.env.SECRET_OR_PRIVATE_KEY);
+        const {uid, role} = jwt.verify(token, process.env.SECRET_OR_PRIVATE_KEY);
         const user = await User.findById(uid);
 
         if(!user){
@@ -32,6 +32,8 @@ export const validateJWT = async (req, res, next) => {
             })
         }
 
+        // Add role from token to user object
+        user.role = role || user.role;
         req.usuario = user
         next()
 
