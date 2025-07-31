@@ -13,14 +13,15 @@ export const register = async (req, res) => {
         const user = await User.create(data);
 
         return res.status(201).json({
+            success: true,
             message: "User has been created",
             name: user.name,
-            email: user.email,
+            email: user.email
         });
     } catch (err) {
         return res.status(500).json({
             message: "User registration failed",
-            error: err.message,
+            error: err.message || "Unknown error",
         });
     }
 };
@@ -52,6 +53,7 @@ export const login = async (req, res) => {
         const token = await generateJWT(user.id);
 
         return res.status(200).json({
+            success: true,
             message: "Login successful",
             userDetails: {
                 token: token,
