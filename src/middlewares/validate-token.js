@@ -14,7 +14,7 @@ export const validateJWT = async (req, res, next) => {
 
         token = token.replace(/^Bearer\s+/, "");
 
-        const { uid } = jwt.verify(token, process.env.SECRET_OR_PRIVATE_KEY);
+        const {uid, role} = jwt.verify(token, process.env.SECRET_OR_PRIVATE_KEY);
         const user = await User.findById(uid);
 
         if (!user) {
@@ -31,8 +31,10 @@ export const validateJWT = async (req, res, next) => {
             });
         }
 
-        req.usuario = user;
-        next();
+        user.role = role || user.role;
+        req.usuario = user
+        next()
+
 
     } catch (error) {
         return res.status(500).json({

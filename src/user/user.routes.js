@@ -8,7 +8,7 @@ const router = Router();
 
 /**
  * @swagger
- * /:
+ * /sieeSystem/v1/user/:
  *   get:
  *     tags:
  *       - Users
@@ -27,16 +27,12 @@ const router = Router();
  *       401:
  *         description: No autorizado
  */
-router.get(
-    "/",
-    validateJWT,
-    hasRoles("ADMIN","MENTOR"),
-    getUser
-);
+router.get("/", validateJWT, hasRoles("ADMIN", "PROFESSOR", "MENTOR"), getUser);
+
 
 /**
  * @swagger
- * /getUserById/{uid}:
+ * /sieeSystem/v1/user/getUserById/{uid}:
  *   get:
  *     tags:
  *       - Users
@@ -66,7 +62,7 @@ router.get(
 
 /**
  * @swagger
- * /updateUser/{uid}:
+ * /sieeSystem/v1/user/updateUser/{uid}:
  *   patch:
  *     tags:
  *       - Users
@@ -104,7 +100,7 @@ router.patch(
 
 /**
  * @swagger
- * /deleteUser/{uid}:
+ * /sieeSystem/v1/user/deleteUser/{uid}:
  *   patch:
  *     tags:
  *       - Users
