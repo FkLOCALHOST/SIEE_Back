@@ -135,6 +135,32 @@ router.patch(
     updateGrade
 );
 
+/**
+ * @swagger
+ * /getGradesByCourseTop10/{uid}:
+ *   get:
+ *     tags:
+ *       - Grades
+ *     summary: Obtener las 10 mejores calificaciones de un curso
+ *     parameters:
+ *       - name: uid
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID único del curso
+ *     responses:
+ *       200:
+ *         description: Lista de las 10 mejores calificaciones del curso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Grade'
+ *       404:
+ *         description: Curso no encontrado
+ */
 router.get(
     "/getGradesByCourseTop10/:uid",
     getGradesByCourseValidator,
