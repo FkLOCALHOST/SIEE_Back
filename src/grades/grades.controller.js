@@ -35,10 +35,42 @@ export const getGradesByStudent = async(req,res) =>{
             .populate("student", "name lastName")
         ])
 
+        // Calculate cycle attendance if grades exist
+        let cycleAttendance = null;
+        let coursesWithAttendance = 0;
+        let attendancesByCourse = [];
+
+        if(grades.length > 0) {
+            // Filter grades that have courseAttendance
+            const gradesWithAttendance = grades.filter(grade => 
+                grade.courseAttendance !== undefined && 
+                grade.courseAttendance !== null
+            );
+
+            coursesWithAttendance = gradesWithAttendance.length;
+
+            if(gradesWithAttendance.length > 0) {
+                const totalAttendance = gradesWithAttendance.reduce((sum, grade) => sum + grade.courseAttendance, 0);
+                cycleAttendance = parseFloat((totalAttendance / gradesWithAttendance.length).toFixed(2));
+            }
+
+            // Map all grades with attendance info
+            attendancesByCourse = grades.map(grade => ({
+                course: grade.course.courseName,
+                courseId: grade.course._id,
+                courseAttendance: grade.courseAttendance || null,
+                score: grade.score,
+                gradeId: grade._id
+            }));
+        }
+
         return res.status(200).json({
             success: true,
             total,
-            grades
+            grades,
+            cycleAttendance,
+            coursesWithAttendance,
+            attendancesByCourse
         })
 
     }catch(err){

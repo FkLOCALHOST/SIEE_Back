@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * @swagger
- * /register:
+ * /sieeSystem/v1/auth/register:
  *   post:
  *     tags:
  *       - Auth
@@ -38,7 +38,7 @@ router.post(
 
 /**
  * @swagger
- * /login:
+ * /sieeSystem/v1/auth/login:
  *   post:
  *     tags:
  *       - Auth

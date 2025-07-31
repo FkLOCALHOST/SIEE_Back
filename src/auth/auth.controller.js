@@ -50,7 +50,7 @@ export const login = async (req, res) => {
             });
         }
 
-        const token = await generateJWT(user.id);
+        const token = await generateJWT(user.id, user.role);
 
         return res.status(200).json({
             success: true,

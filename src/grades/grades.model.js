@@ -15,6 +15,12 @@ export const gradesSchema = new Schema({
         type: Number,
         required: [true, "La calificación es obligatoria"]
     },
+    courseAttendance:{
+        type: Number,
+        required: [true, "La asistencia del curso es obligatoria"],
+        min: [0, "La asistencia no puede ser menor a 0"],
+        max: [100, "La asistencia no puede ser mayor a 100"]
+    },
     status:{
         type: Boolean,
         default: true

@@ -6,7 +6,7 @@ const router = Router();
 
 /**
  * @swagger
- * /createGrade:
+ * /sieeSystem/v1/grades/createGrade:
  *   post:
  *     tags:
  *       - Grades
@@ -35,11 +35,11 @@ router.post(
 
 /**
  * @swagger
- * /getGradesByStudent/{uid}:
+ * /sieeSystem/v1/grades/getGradesByStudent/{uid}:
  *   get:
  *     tags:
  *       - Grades
- *     summary: Obtener todas las calificaciones de un estudiante
+ *     summary: Obtener todas las calificaciones de un estudiante con asistencia de ciclo
  *     parameters:
  *       - name: uid
  *         in: path
@@ -49,13 +49,29 @@ router.post(
  *         description: ID único del estudiante
  *     responses:
  *       200:
- *         description: Lista de calificaciones del estudiante
+ *         description: Lista de calificaciones del estudiante con información de asistencia
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Grade'
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 total:
+ *                   type: number
+ *                 grades:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Grade'
+ *                 cycleAttendance:
+ *                   type: number
+ *                   description: Promedio de asistencia de todos los cursos
+ *                 coursesWithAttendance:
+ *                   type: number
+ *                 attendancesByCourse:
+ *                   type: array
+ *                   items:
+ *                     type: object
  *       404:
  *         description: Estudiante no encontrado
  */
@@ -67,7 +83,7 @@ router.get(
 
 /**
  * @swagger
- * /getGradesByCourse/{uid}:
+ * /sieeSystem/v1/grades/getGradesByCourse/{uid}:
  *   get:
  *     tags:
  *       - Grades
@@ -99,7 +115,7 @@ router.get(
 
 /**
  * @swagger
- * /updateGrade/{uid}:
+ * /sieeSystem/v1/grades/updateGrade/{uid}:
  *   patch:
  *     tags:
  *       - Grades
@@ -135,6 +151,32 @@ router.patch(
     updateGrade
 );
 
+/**
+ * @swagger
+ * /sieeSystem/v1/grades/getGradesByCourseTop10/{uid}:
+ *   get:
+ *     tags:
+ *       - Grades
+ *     summary: Obtener las 10 mejores calificaciones de un curso
+ *     parameters:
+ *       - name: uid
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID único del curso
+ *     responses:
+ *       200:
+ *         description: Lista de las 10 mejores calificaciones del curso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Grade'
+ *       404:
+ *         description: Curso no encontrado
+ */
 router.get(
     "/getGradesByCourseTop10/:uid",
     getGradesByCourseValidator,
