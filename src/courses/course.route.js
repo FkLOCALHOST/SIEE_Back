@@ -6,7 +6,7 @@ const router = Router();
 
 /**
  * @swagger
- * /createCourse:
+ * /sieeSystem/v1/course/createCourse:
  *   post:
  *     tags:
  *       - Courses
@@ -35,7 +35,7 @@ router.post(
 
 /**
  * @swagger
- * /getCourse:
+ * /sieeSystem/v1/course/getCourse:
  *   get:
  *     tags:
  *       - Courses
@@ -57,7 +57,7 @@ router.get(
 
 /**
  * @swagger
- * /getCourseById/{uid}:
+ * /sieeSystem/v1/course/getCourseById/{uid}:
  *   get:
  *     tags:
  *       - Courses
@@ -87,7 +87,7 @@ router.get(
 
 /**
  * @swagger
- * /updateCourse/{uid}:
+ * /sieeSystem/v1/course/updateCourse/{uid}:
  *   patch:
  *     tags:
  *       - Courses
@@ -125,7 +125,7 @@ router.patch(
 
 /**
  * @swagger
- * /deleteCourse/{uid}:
+ * /sieeSystem/v1/course/deleteCourse/{uid}:
  *   patch:
  *     tags:
  *       - Courses
@@ -151,7 +151,7 @@ router.patch(
 
 /**
  * @swagger
- * /enrollStudent:
+ * /sieeSystem/v1/course/enrollStudent:
  *   post:
  *     tags:
  *       - Courses

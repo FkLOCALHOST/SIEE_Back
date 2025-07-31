@@ -6,7 +6,7 @@ const router = Router();
 
 /**
  * @swagger
- * /addPsych:
+ * /sieeSystem/v1/psych/addPsych:
  *   post:
  *     tags:
  *       - Psychology
@@ -35,7 +35,7 @@ router.post(
 
 /**
  * @swagger
- * /:
+ * /sieeSystem/v1/psych/:
  *   get:
  *     tags:
  *       - Psychology
@@ -57,7 +57,7 @@ router.get(
 
 /**
  * @swagger
- * /getPsych/{uid}:
+ * /sieeSystem/v1/psych/getPsych/{uid}:
  *   get:
  *     tags:
  *       - Psychology
@@ -87,7 +87,7 @@ router.get(
 
 /**
  * @swagger
- * /deletePsych/{uid}:
+ * /sieeSystem/v1/psych/deletePsych/{uid}:
  *   patch:
  *     tags:
  *       - Psychology
@@ -113,7 +113,7 @@ router.patch(
 
 /**
  * @swagger
- * /updatePsych/{uid}:
+ * /sieeSystem/v1/psych/updatePsych/{uid}:
  *   patch:
  *     tags:
  *       - Psychology
@@ -151,7 +151,7 @@ router.patch(
 
 /**
  * @swagger
- * /getPsychByStudent/{uid}:
+ * /sieeSystem/v1/psych/getPsychByStudent/{uid}:
  *   get:
  *     tags:
  *       - Psychology
